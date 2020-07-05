@@ -1,10 +1,19 @@
 package com.mhomecare.customer.model;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+@Entity
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Customer {
 
-	private String id;
+	@Id
+	@Basic(optional = false)
+	String id;
 	private String name;
 	private Integer age;
 	private String emailId;
