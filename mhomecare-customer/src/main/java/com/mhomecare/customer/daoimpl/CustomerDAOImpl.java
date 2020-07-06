@@ -1,5 +1,8 @@
 package com.mhomecare.customer.daoimpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mhomecare.customer.dao.CustomerDAO;
@@ -13,6 +16,11 @@ public class CustomerDAOImpl implements CustomerDAO {
 	
 	@Autowired
 	Persistence persistence ; 
+	
+	/**
+	 * Description : Register new customer 
+	 */
+	
 
 	@Override
 	public CustomerResponse registerCustomer(CustomerRequest customerRequest) {
@@ -23,7 +31,63 @@ public class CustomerDAOImpl implements CustomerDAO {
 		customer.setEmailId(customerRequest.getEmailId());
 		customer.setPhoneNumber(customerRequest.getPhoneNumber());
 		customer.setAddress(customerRequest.getAddress());
+		customer.setImageUrl(customerRequest.getImagesUrl());
 		persistence.saveObjectToDb(customer);
+		CustomerResponse customerResponse = new CustomerResponse(customer);
+		return customerResponse;
+	}
+	
+	/**
+	 * @ Description : get list of customer which are not deleted
+	 */
+
+	@Override
+	public List<CustomerResponse> getCustomers() {
+		List<Customer> customers = persistence.getAllCustomers();
+		List<CustomerResponse> customerResponses = new ArrayList<>();
+		for(Customer customer : customers){
+			customerResponses.add(new CustomerResponse(customer));
+		}
+		return customerResponses;
+	}
+	
+	/**
+	 * @Description : get specific customer from customer list
+	 */
+
+	@Override
+	public Customer getCustomerById(String customerId) {
+		Customer customer = persistence.getCustomerById(customerId);
+		return customer;
+	}
+	
+	/**
+	 * @Description : update specific customer  
+	 */
+
+	@Override
+	public CustomerResponse updateCustomer(CustomerRequest customerRequest, String customerId) {
+		Customer customer = persistence.getCustomerById(customerId);
+		customer.setName(customerRequest.getName());
+		customer.setAge(customerRequest.getAge());
+		customer.setEmailId(customerRequest.getEmailId());
+		customer.setPhoneNumber(customerRequest.getPhoneNumber());
+		customer.setAddress(customerRequest.getAddress());
+		customer.setImageUrl(customerRequest.getImagesUrl());
+		persistence.mergeObjectToDb(customer);
+		CustomerResponse customerResponse = new CustomerResponse(customer);
+		return customerResponse;
+	}
+	
+	/**
+	 * @Description : delete specific customer  
+	 */
+
+	@Override
+	public CustomerResponse deleteCustomer(String customerId) {
+		Customer customer = persistence.getCustomerById(customerId);
+		customer.setDeleted(true);
+		persistence.mergeObjectToDb(customer);
 		CustomerResponse customerResponse = new CustomerResponse(customer);
 		return customerResponse;
 	}

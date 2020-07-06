@@ -8,10 +8,11 @@ public class CustomerRequest {
 	private String emailId;
 	private String phoneNumber;
 	private String address;
+	private String imagesUrl;
 
 	public String getId() {
 		return id;
-	}	
+	}
 
 	public void setId(String id) {
 		this.id = id;
@@ -55,6 +56,14 @@ public class CustomerRequest {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getImagesUrl() {
+		return imagesUrl;
+	}
+
+	public void setImagesUrl(String imagesUrl) {
+		this.imagesUrl = imagesUrl;
 	}
 
 }

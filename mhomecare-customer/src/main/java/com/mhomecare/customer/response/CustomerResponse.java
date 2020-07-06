@@ -10,6 +10,7 @@ public class CustomerResponse {
 	private String emailId;
 	private String phoneNumber;
 	private String address;
+	private String imageUrl;
 
 	public CustomerResponse(Customer customer) {
 
@@ -19,6 +20,7 @@ public class CustomerResponse {
 		this.emailId = customer.getEmailId();
 		this.phoneNumber = customer.getPhoneNumber();
 		this.address = customer.getAddress();
+		this.imageUrl = customer.getImageUrl();
 
 	}
 
@@ -69,5 +71,14 @@ public class CustomerResponse {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
 
 }

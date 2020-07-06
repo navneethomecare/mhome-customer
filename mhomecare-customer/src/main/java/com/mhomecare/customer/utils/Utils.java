@@ -4,6 +4,12 @@ import java.nio.charset.Charset;
 import java.util.Random;
 
 public class Utils {
+	/**
+	 * 
+	 * @param n
+	 * @return
+	 * @ Description : generating unique id for new register customer
+	 */
 	public static String generateUniqueId(int n) {
 		byte[] array = new byte[256];
 		new Random().nextBytes(array);
