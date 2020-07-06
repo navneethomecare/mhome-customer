@@ -3,7 +3,6 @@ package com.mhomecare.customer.controller;
 import java.util.List;
 
 import javax.transaction.Transactional;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,7 +52,7 @@ public class CustomerController {
 	
 	@Transactional
 	@RequestMapping(value = "/{customerId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SingleResponseObject<String>> updateCustomer(@RequestBody CustomerRequest customerRequest, @NotNull @PathVariable(name = "customerId") String customerId) {
+	public ResponseEntity<SingleResponseObject<String>> updateCustomer(@RequestBody CustomerRequest customerRequest, @PathVariable(name = "customerId") String customerId) {
 		CustomerResponse customerResponse = customerService.updateCustomer(customerRequest, customerId);
 		SingleResponseObject<String> respObj = new SingleResponseObject<String>(customerResponse.getId());
 		return new ResponseEntity<SingleResponseObject<String>>(respObj, HttpStatus.OK);
@@ -78,7 +77,7 @@ public class CustomerController {
 	 */
 	
 	@RequestMapping(value = "/{customerId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SingleResponseObject<CustomerResponse>> getCustomerById(@NotNull @PathVariable(name = "customerId") String customerId){
+	public ResponseEntity<SingleResponseObject<CustomerResponse>> getCustomerById(@PathVariable(name = "customerId") String customerId){
 		Customer customer = customerService.getCustomerById(customerId);
 		SingleResponseObject<CustomerResponse> respObj = new SingleResponseObject<CustomerResponse>(new CustomerResponse(customer));
 		return new ResponseEntity<SingleResponseObject<CustomerResponse>>(respObj, HttpStatus.OK);
@@ -93,7 +92,7 @@ public class CustomerController {
 	
 	@Transactional
 	@RequestMapping(value = "/{customerId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SingleResponseObject<String>> deleteCustomer(@NotNull @PathVariable(name = "customerId") String customerId) {
+	public ResponseEntity<SingleResponseObject<String>> deleteCustomer(@PathVariable(name = "customerId") String customerId) {
 		CustomerResponse customerResponse = customerService.deleteCustomer(customerId);
 		SingleResponseObject<String> respObj = new SingleResponseObject<String>(customerResponse.getId());
 		return new ResponseEntity<SingleResponseObject<String>>(respObj, HttpStatus.OK);
