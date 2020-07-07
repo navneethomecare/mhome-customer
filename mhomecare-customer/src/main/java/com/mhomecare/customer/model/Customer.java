@@ -1,8 +1,10 @@
 package com.mhomecare.customer.model;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 
 import org.hibernate.annotations.Cache;
@@ -22,6 +24,9 @@ public class Customer {
 	private String address;
 	private String imageUrl;
 	private Boolean deleted;
+
+	@OneToOne(targetEntity = Login.class, cascade = CascadeType.ALL)
+	private Login login;
 
 	@PrePersist
 	public void prePersist() {
@@ -92,6 +97,14 @@ public class Customer {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public Login getLogin() {
+		return login;
+	}
+
+	public void setLogin(Login login) {
+		this.login = login;
 	}
 
 }

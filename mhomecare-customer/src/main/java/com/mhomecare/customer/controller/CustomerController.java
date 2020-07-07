@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mhomecare.customer.exceptions.DataNotFoundException;
 import com.mhomecare.customer.model.Customer;
 import com.mhomecare.customer.request.CustomerRequest;
 import com.mhomecare.customer.response.CustomerResponse;

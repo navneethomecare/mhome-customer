@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mhomecare.customer.dao.CustomerDAO;
 import com.mhomecare.customer.model.Customer;
+import com.mhomecare.customer.model.Login;
 import com.mhomecare.customer.persistence.Persistence;
 import com.mhomecare.customer.request.CustomerRequest;
 import com.mhomecare.customer.response.CustomerResponse;
@@ -32,6 +33,12 @@ public class CustomerDAOImpl implements CustomerDAO {
 		customer.setPhoneNumber(customerRequest.getPhoneNumber());
 		customer.setAddress(customerRequest.getAddress());
 		customer.setImageUrl(customerRequest.getImagesUrl());
+		Login login = new Login();
+		login.setId(Utils.generateUniqueId(10));
+		login.setPhoneNumber(customerRequest.getPhoneNumber());
+		login.setOtp(1234);
+		customer.setLogin(login);
+		login.setCustomer(customer);
 		persistence.saveObjectToDb(customer);
 		CustomerResponse customerResponse = new CustomerResponse(customer);
 		return customerResponse;
