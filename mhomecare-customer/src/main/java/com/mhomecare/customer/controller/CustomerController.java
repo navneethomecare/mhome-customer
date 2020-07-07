@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mhomecare.customer.exceptions.DataNotFoundException;
 import com.mhomecare.customer.model.Customer;
 import com.mhomecare.customer.request.CustomerRequest;
 import com.mhomecare.customer.response.CustomerResponse;
 import com.mhomecare.customer.responsetype.ListResponseObject;
 import com.mhomecare.customer.responsetype.SingleResponseObject;
 import com.mhomecare.customer.serviceimpl.CustomerServiceImpl;
+import com.mhomecare.customer.validation.Validate;
 
 @RestController
 @RequestMapping("/customer")
@@ -37,6 +39,7 @@ public class CustomerController {
 	@Transactional
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SingleResponseObject<String>> customerRegister(@RequestBody CustomerRequest customerRequest) {
+		Validate.validateCustomerFields(customerRequest);
 		CustomerResponse customerResponse = customerService.registerCustomer(customerRequest);
 		SingleResponseObject<String> respObj = new SingleResponseObject<String>(customerResponse.getId());
 		return new ResponseEntity<SingleResponseObject<String>>(respObj, HttpStatus.OK);
