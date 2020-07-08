@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContextType;
 import javax.transaction.Transactional;
 
 import com.mhomecare.customer.model.Customer;
+import com.mhomecare.customer.model.Login;
 
 public class Persistence {
 	/**
@@ -60,6 +61,16 @@ public class Persistence {
 	public Customer getCustomerById(String customerId){
 		List<Customer> results = entityManager.createQuery("select c from Customer c where c.id = :customerId and deleted = 0",Customer.class)
 				.setParameter("customerId", customerId)
+				.getResultList();
+		if (results.size() > 0) {
+			return results.get(0);
+		}
+		return null;
+	}
+	
+	public Login findCustomerByPhoneNumber(String phoneNumber){
+		List<Login> results = entityManager.createQuery("select l from Login l where l.phoneNumber = :phoneNumber",Login.class)
+				.setParameter("phoneNumber", phoneNumber)
 				.getResultList();
 		if (results.size() > 0) {
 			return results.get(0);

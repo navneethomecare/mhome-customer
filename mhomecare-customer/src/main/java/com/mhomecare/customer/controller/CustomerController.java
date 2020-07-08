@@ -23,7 +23,7 @@ import com.mhomecare.customer.serviceimpl.CustomerServiceImpl;
 import com.mhomecare.customer.validation.Validate;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/mhomecare/customer")
 public class CustomerController {
 
 	@Autowired
