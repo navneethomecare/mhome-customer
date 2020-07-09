@@ -17,6 +17,7 @@ public class Login {
 	String id;
 	private String phoneNumber;
 	private Integer otp;
+	private Integer countryCode;
 
 	@OneToOne(targetEntity = Customer.class)
 	private Customer customer;
@@ -51,6 +52,14 @@ public class Login {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public Integer getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(Integer countryCode) {
+		this.countryCode = countryCode;
 	}
 
 }

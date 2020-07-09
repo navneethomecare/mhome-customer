@@ -53,4 +53,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler
     	SingleResponseObject<Object> respObj = new SingleResponseObject<Object>(error);
     	return new ResponseEntity<SingleResponseObject<Object>>(respObj, HttpStatus.BAD_REQUEST);
     }
+    
+    @ExceptionHandler(DuplicateException.class)
+    public final ResponseEntity<SingleResponseObject<Object>> handleDulicateException(DuplicateException ex,
+    		WebRequest request) {
+    	List<String> details = new ArrayList<>();
+    	details.add(ex.getLocalizedMessage());
+    	ErrorResponse error = new ErrorResponse(ErrorMessage.DUPLICATE_RECORD, details);
+    	SingleResponseObject<Object> respObj = new SingleResponseObject<Object>(error);
+    	return new ResponseEntity<SingleResponseObject<Object>>(respObj, HttpStatus.BAD_REQUEST);
+    }
 }

@@ -7,11 +7,13 @@ public class LoginResponse {
 	private String id;
 	private String phoneNumber;
 	private Integer otp;
+	private Integer countryCode;
 
 	public LoginResponse(Login login) {
 		this.id = login.getId();
 		this.otp = login.getOtp();
 		this.phoneNumber = login.getPhoneNumber();
+		this.countryCode = login.getCountryCode();
 	}
 
 	public String getId() {
@@ -37,5 +39,15 @@ public class LoginResponse {
 	public void setOtp(Integer otp) {
 		this.otp = otp;
 	}
+
+	public Integer getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(Integer countryCode) {
+		this.countryCode = countryCode;
+	}
+	
+	
 
 }

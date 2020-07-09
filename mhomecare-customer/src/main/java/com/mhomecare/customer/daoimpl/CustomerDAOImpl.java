@@ -12,6 +12,7 @@ import com.mhomecare.customer.persistence.Persistence;
 import com.mhomecare.customer.request.CustomerRequest;
 import com.mhomecare.customer.response.CustomerResponse;
 import com.mhomecare.customer.utils.Utils;
+import com.mhomecare.customer.validation.Validate;
 
 public class CustomerDAOImpl implements CustomerDAO {
 	
@@ -25,6 +26,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public CustomerResponse registerCustomer(CustomerRequest customerRequest) {
+		Login findPhoneNumber = persistence.findCustomerByPhoneNumber(customerRequest.getPhoneNumber());
+		Validate.validateCustomerFields(customerRequest,findPhoneNumber,persistence);
 		Customer customer = new Customer();
 		customer.setId(Utils.generateUniqueId(10));
 		customer.setName(customerRequest.getName());
@@ -37,6 +40,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		login.setId(Utils.generateUniqueId(10));
 		login.setPhoneNumber(customerRequest.getPhoneNumber());
 		login.setOtp(1234);
+		login.setCountryCode(customerRequest.getCountryCode());
 		customer.setLogin(login);
 		login.setCustomer(customer);
 		persistence.saveObjectToDb(customer);

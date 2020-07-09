@@ -38,7 +38,6 @@ public class CustomerController {
 	@Transactional
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SingleResponseObject<String>> customerRegister(@RequestBody CustomerRequest customerRequest) {
-		Validate.validateCustomerFields(customerRequest);
 		CustomerResponse customerResponse = customerService.registerCustomer(customerRequest);
 		SingleResponseObject<String> respObj = new SingleResponseObject<String>(customerResponse.getId());
 		return new ResponseEntity<SingleResponseObject<String>>(respObj, HttpStatus.OK);

@@ -9,6 +9,7 @@ public class CustomerRequest {
 	private String phoneNumber;
 	private String address;
 	private String imagesUrl;
+	private Integer countryCode;
 
 	public String getId() {
 		return id;
@@ -64,6 +65,14 @@ public class CustomerRequest {
 
 	public void setImagesUrl(String imagesUrl) {
 		this.imagesUrl = imagesUrl;
+	}
+
+	public Integer getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(Integer countryCode) {
+		this.countryCode = countryCode;
 	}
 
 }
