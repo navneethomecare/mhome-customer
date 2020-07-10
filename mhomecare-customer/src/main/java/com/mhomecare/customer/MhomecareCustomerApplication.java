@@ -6,9 +6,11 @@ import org.springframework.context.annotation.Bean;
 
 import com.mhomecare.customer.daoimpl.CustomerDAOImpl;
 import com.mhomecare.customer.daoimpl.LoginDAOImpl;
+import com.mhomecare.customer.daoimpl.ProfileDAOImpl;
 import com.mhomecare.customer.persistence.Persistence;
 import com.mhomecare.customer.serviceimpl.CustomerServiceImpl;
 import com.mhomecare.customer.serviceimpl.LoginServiceImpl;
+import com.mhomecare.customer.serviceimpl.ProfileServiceImpl;
 
 @SpringBootApplication
 public class MhomecareCustomerApplication {
@@ -40,6 +42,16 @@ public class MhomecareCustomerApplication {
 	@Bean
 	public LoginServiceImpl getLoginServiceImpl() {
 		return new LoginServiceImpl();
+	}
+	
+	@Bean
+	public ProfileDAOImpl getProfileDAOImpl() {
+		return new ProfileDAOImpl();
+	}
+
+	@Bean
+	public ProfileServiceImpl getProfileServiceImpl() {
+		return new ProfileServiceImpl();
 	}
 
 }

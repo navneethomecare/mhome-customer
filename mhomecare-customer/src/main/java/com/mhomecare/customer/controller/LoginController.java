@@ -15,7 +15,6 @@ import com.mhomecare.customer.request.LoginRequest;
 import com.mhomecare.customer.response.LoginResponse;
 import com.mhomecare.customer.responsetype.SingleResponseObject;
 import com.mhomecare.customer.serviceimpl.LoginServiceImpl;
-import com.mhomecare.customer.validation.Validate;
 
 @RestController
 @RequestMapping("/mhomecare/login")

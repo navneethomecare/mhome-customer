@@ -20,7 +20,6 @@ import com.mhomecare.customer.response.CustomerResponse;
 import com.mhomecare.customer.responsetype.ListResponseObject;
 import com.mhomecare.customer.responsetype.SingleResponseObject;
 import com.mhomecare.customer.serviceimpl.CustomerServiceImpl;
-import com.mhomecare.customer.validation.Validate;
 
 @RestController
 @RequestMapping("/mhomecare/customer")
