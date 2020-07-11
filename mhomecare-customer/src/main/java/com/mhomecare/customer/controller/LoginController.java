@@ -33,7 +33,6 @@ public class LoginController {
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SingleResponseObject<LoginResponse>> login(@RequestBody LoginRequest loginRequest) {
 		Validate.validateLoginCustomer(loginRequest);
-		ValidateFromDB.validateFromDB(loginRequest, persistence);
 		LoginResponse loginResponse = customerService.loginCustomer(loginRequest);
 		SingleResponseObject<LoginResponse> respObj = new SingleResponseObject<LoginResponse>(loginResponse);
 		return new ResponseEntity<SingleResponseObject<LoginResponse>>(respObj, HttpStatus.OK);
