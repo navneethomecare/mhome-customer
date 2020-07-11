@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import com.mhomecare.customer.model.Customer;
 import com.mhomecare.customer.model.Login;
+import com.mhomecare.customer.model.Profile;
 
 public class Persistence {
 	/**
@@ -74,6 +75,36 @@ public class Persistence {
 				.getResultList();
 		if (results.size() > 0) {
 			return results.get(0);
+		}
+		return null;
+	}
+	
+	public Customer checkCustomerPhoneNumberDulicateOrNot(String phoneNumber){
+		List<Customer> results = entityManager.createQuery("select l from Customer l where l.phoneNumber = :phoneNumber",Customer.class)
+				.setParameter("phoneNumber", phoneNumber)
+				.getResultList();
+		if (results.size() > 0) {
+			return results.get(0);
+		}
+		return null;
+	}
+	
+	public Profile checkProfilePhoneNumberDulicateOrNot(String phoneNumber){
+		List<Profile> results = entityManager.createQuery("select l from Profile l where l.phoneNumber = :phoneNumber",Profile.class)
+				.setParameter("phoneNumber", phoneNumber)
+				.getResultList();
+		if (results.size() > 0) {
+			return results.get(0);
+		}
+		return null;
+	}
+	
+	public List<Profile> profileDetails(String customerId){
+		List<Profile> results = entityManager.createQuery("select p from Profile p where p.customerId = :customerId",Profile.class)
+				.setParameter("customerId", customerId)
+				.getResultList();
+		if (results.size() > 0) {
+			return results;
 		}
 		return null;
 	}

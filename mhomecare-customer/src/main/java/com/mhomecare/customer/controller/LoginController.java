@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mhomecare.customer.persistence.Persistence;
 import com.mhomecare.customer.request.LoginRequest;
 import com.mhomecare.customer.response.LoginResponse;
 import com.mhomecare.customer.responsetype.SingleResponseObject;
 import com.mhomecare.customer.serviceimpl.LoginServiceImpl;
+import com.mhomecare.customer.validation.Validate;
+import com.mhomecare.customer.validation.ValidateFromDB;
 
 @RestController
 @RequestMapping("/mhomecare/login")
@@ -22,11 +25,17 @@ public class LoginController {
 	@Autowired
 	private LoginServiceImpl customerService;
 	
+
+	@Autowired
+	Persistence persistence;
+	
 	@Transactional
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SingleResponseObject<String>> login(@RequestBody LoginRequest loginRequest) {
+	public ResponseEntity<SingleResponseObject<LoginResponse>> login(@RequestBody LoginRequest loginRequest) {
+		Validate.validateLoginCustomer(loginRequest);
+		ValidateFromDB.validateFromDB(loginRequest, persistence);
 		LoginResponse loginResponse = customerService.loginCustomer(loginRequest);
-		SingleResponseObject<String> respObj = new SingleResponseObject<String>(loginResponse.getId());
-		return new ResponseEntity<SingleResponseObject<String>>(respObj, HttpStatus.OK);
+		SingleResponseObject<LoginResponse> respObj = new SingleResponseObject<LoginResponse>(loginResponse);
+		return new ResponseEntity<SingleResponseObject<LoginResponse>>(respObj, HttpStatus.OK);
 	}
 }

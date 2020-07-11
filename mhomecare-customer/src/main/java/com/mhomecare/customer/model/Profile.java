@@ -1,8 +1,10 @@
 package com.mhomecare.customer.model;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -23,6 +25,9 @@ public class Profile {
 	private String bloodGroup;
 	private String phoneNumber;
 	private String customerId;
+	
+	@OneToOne(targetEntity = Login.class, cascade = CascadeType.ALL)
+	private Login login;
 
 	public String getId() {
 		return id;
