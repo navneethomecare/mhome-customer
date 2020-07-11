@@ -28,9 +28,6 @@ public class Validate {
 		if(request.getEmailId().isEmpty() || request.getEmailId() == null){
 			 throw new InvalidInputException("Customer email id is missing!");
 		}
-		if(request.getImagesUrl().isEmpty() || request.getImagesUrl() == null){
-			 throw new InvalidInputException("Customer image is missing!");
-		}
 		if(request.getPhoneNumber().isEmpty() || request.getPhoneNumber() == null){
 			 throw new InvalidInputException("Customer phone number is missing!");
 		}
