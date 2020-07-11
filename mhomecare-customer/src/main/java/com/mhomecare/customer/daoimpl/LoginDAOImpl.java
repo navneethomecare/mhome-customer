@@ -20,8 +20,6 @@ public class LoginDAOImpl implements LoginDAO{
 
 	@Override
 	public LoginResponse loginCustomer(LoginRequest loginRequest) {
-		Validate.validateLoginCustomer(loginRequest);
-		ValidateFromDB.validateFromDB(loginRequest, persistence);
 		Login login = persistence.findCustomerByPhoneNumber(loginRequest.getPhoneNumber());
 		List<Profile> profile = persistence.profileDetails(login.getCustomer().getId());
 		login.setProfile(profile);

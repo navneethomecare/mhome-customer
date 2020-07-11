@@ -27,8 +27,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public CustomerResponse registerCustomer(CustomerRequest customerRequest) {
-		Validate.validateCustomerFields(customerRequest);
-		ValidateFromDB.validateFromDB(customerRequest, persistence);
 		Customer customer = new Customer();
 		customer.setId(Utils.generateUniqueId(10));
 		customer.setName(customerRequest.getName());
